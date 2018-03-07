@@ -8,10 +8,16 @@ namespace prototype.src
     class Program
     {
 		const int DATA_LENGTH = 428;
+		const int RSA_KEY_LENGTH = 4096;
 
 		public static async Task MainAsync()
 		{
-			using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(WorkHistroySmartContract.RSA_KEY_LENGTH))
+			string xmlString;
+
+			WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
+			RSACryptoServiceProvider rsa;
+
+			using (rsa = new RSACryptoServiceProvider(RSA_KEY_LENGTH))
 			{
 				try
 				{
@@ -19,8 +25,9 @@ namespace prototype.src
 					string senderAddress = "0x25922333d41f0f3f40be629f81af6983634d0fb6";
 					string password = "passphrase";
 					string data = new string('*', DATA_LENGTH);
-					WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
 					workHistroySmartContract.RSA = rsa;
+
+					xmlString = RSACryptoServiceProviderExtensions.ToXmlString(rsa);
 
 					DataCustodianPublisher dataCustodianPublisher = new DataCustodianPublisher();
 					dataCustodianPublisher.WorkHistroySmartContract = workHistroySmartContract;
@@ -34,19 +41,32 @@ namespace prototype.src
 
 					bool match = await dataCustodianPublisher.CompareHashAsync(data);
 
-					DataSubjectSharer dataSubjectSharer = new DataSubjectSharer();
-					dataSubjectSharer.WorkHistroySmartContract = workHistroySmartContract;
-					dataSubjectSharer.RSA = rsa;
-
 					Console.WriteLine("Are they a match {0}", match);
-
-					string decryptedData = await dataSubjectSharer.DecryptDataFromContract();
-
-					Console.WriteLine("Decryped Data from blockchain: {0}", decryptedData);	
 				}
 				finally
 				{
 					rsa.PersistKeyInCsp = false;
+				}
+
+				using (rsa = new RSACryptoServiceProvider(RSA_KEY_LENGTH))
+				{
+					try
+					{
+						RSACryptoServiceProviderExtensions.FromXmlString(rsa, xmlString);
+
+						DataSubjectSharer dataSubjectSharer = new DataSubjectSharer();
+						dataSubjectSharer.WorkHistroySmartContract = workHistroySmartContract;
+						dataSubjectSharer.RSA = rsa;
+
+
+						string decryptedData = await dataSubjectSharer.DecryptDataFromContract();
+
+						Console.WriteLine("Decryped Data from blockchain: {0}", decryptedData);
+					}
+					finally
+					{
+						rsa.PersistKeyInCsp = false;
+					}
 				}
 			}
 			
