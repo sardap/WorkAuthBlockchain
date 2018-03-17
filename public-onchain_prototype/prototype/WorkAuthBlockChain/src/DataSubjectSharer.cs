@@ -4,9 +4,9 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
-namespace prototype.src
+namespace WorkAuthBlockChain
 {
-    class DataSubjectSharer
+	public class DataSubjectSharer
     {
 		public RSACryptoServiceProvider RSA
 		{
@@ -34,6 +34,6 @@ namespace prototype.src
 			return DecryptData(await WorkHistroySmartContract.GetData());
 		}
 
-
+		
 	}
 }

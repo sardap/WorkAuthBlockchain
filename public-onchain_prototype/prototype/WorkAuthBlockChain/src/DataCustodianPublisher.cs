@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Text;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
-namespace prototype.src
+namespace WorkAuthBlockChain
 {
-    class DataCustodianPublisher
+	public class DataCustodianPublisher
     {
 		public RSACryptoServiceProvider RSA
 		{
@@ -30,13 +31,23 @@ namespace prototype.src
 
 		public async Task<string> PublishWorkHistoryAsync(string data, string senderAddress, string senderPassword)
 		{
-			bool unlockAcountResult = await WorkHistroySmartContract.UnlockAccount(senderAddress, senderPassword);
+			// This seems fucking dumb
+			string error = WorkHistroySmartContract.DataVaild(data);
 
-			string encryptedData = EncyptData(data);
+			if(error == "")
+			{
+				bool unlockAcountResult = await WorkHistroySmartContract.UnlockAccount(senderAddress, senderPassword);
 
-			string trasnactionHash = await WorkHistroySmartContract.Deploy(encryptedData, data.GetHashCode());
+				string encryptedData = EncyptData(data);
 
-			return trasnactionHash;
+				string trasnactionHash = await WorkHistroySmartContract.Deploy(encryptedData, data.GetHashCode());
+
+				return trasnactionHash;
+			}
+			else
+			{
+				throw new WorkHistroySmartContractInvaildDataException(error);
+			}
 		}
 
 		public async Task<bool> CompareHashAsync(string data)

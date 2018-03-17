@@ -1,14 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WorkAuthBlockChain\WorkAuthBlockChain.csproj" />
+    <PackageReference Include="Nethereum.Web3" Version="2.4.0" />
   </ItemGroup>
-
 
 </Project>

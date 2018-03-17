@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Xml;
 
-namespace prototype
+namespace WorkAuthBlockChain
 {
 	public static class RSACryptoServiceProviderExtensions
 	{

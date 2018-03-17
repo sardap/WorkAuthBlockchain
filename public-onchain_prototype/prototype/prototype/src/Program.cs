@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using Nethereum.Web3;
+using WorkAuthBlockChain;
+using System.Collections.Generic;
 
 namespace prototype.src
 {
@@ -16,15 +18,16 @@ namespace prototype.src
 
 			WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
 			RSACryptoServiceProvider rsa;
+			string address;
+			string data = new string('*', DATA_LENGTH);
 
 			using (rsa = new RSACryptoServiceProvider(RSA_KEY_LENGTH))
 			{
 				try
 				{
 
-					string senderAddress = "0x25922333d41f0f3f40be629f81af6983634d0fb6";
+					string senderAddress = "0x7bc0157bc7e0ae9183e6d7688009963b18855248";
 					string password = "passphrase";
-					string data = new string('*', DATA_LENGTH);
 					workHistroySmartContract.RSA = rsa;
 
 					xmlString = RSACryptoServiceProviderExtensions.ToXmlString(rsa);
@@ -35,9 +38,11 @@ namespace prototype.src
 
 					Console.WriteLine("Original Data: {0}", data);
 
-					await dataCustodianPublisher.PublishWorkHistoryAsync(data, senderAddress, password);
+					address = await dataCustodianPublisher.PublishWorkHistoryAsync(data, senderAddress, password);
 
-					while (workHistroySmartContract.Address == string.Empty) ;
+					while (address == null) ;
+
+					workHistroySmartContract.LoadContract(address);
 
 					bool match = await dataCustodianPublisher.CompareHashAsync(data);
 
@@ -58,7 +63,6 @@ namespace prototype.src
 						dataSubjectSharer.WorkHistroySmartContract = workHistroySmartContract;
 						dataSubjectSharer.RSA = rsa;
 
-
 						string decryptedData = await dataSubjectSharer.DecryptDataFromContract();
 
 						Console.WriteLine("Decryped Data from blockchain: {0}", decryptedData);
@@ -68,8 +72,15 @@ namespace prototype.src
 						rsa.PersistKeyInCsp = false;
 					}
 				}
+
+				DataConsumer dataConsumer = new DataConsumer();
+				dataConsumer.WorkHistroySmartContract = workHistroySmartContract;
+
+				// @Bad Should probalby not be a list of fucking bools
+				List<bool> verfiyResult = await dataConsumer.Verfiy(data, address);
+				Console.WriteLine("The data hash is {0}", verfiyResult[0]);
+				Console.WriteLine("The data issuer is {0}", verfiyResult[1]);
 			}
-			
 		}
 
 		static void Main()
