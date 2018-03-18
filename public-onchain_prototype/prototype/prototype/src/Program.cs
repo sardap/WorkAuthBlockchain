@@ -19,8 +19,10 @@ namespace prototype.src
 			WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
 			RSACryptoServiceProvider rsa;
 			string address;
-			string data = new string('*', DATA_LENGTH);
+			//string data = new string('*', DATA_LENGTH);
+			string data = "paulsarda.com, IT Idiot";
 
+			Console.WriteLine("DATA CUSTODIAN");
 			using (rsa = new RSACryptoServiceProvider(RSA_KEY_LENGTH))
 			{
 				try
@@ -53,6 +55,7 @@ namespace prototype.src
 					rsa.PersistKeyInCsp = false;
 				}
 
+				Console.WriteLine("DATA SUBJECT");
 				using (rsa = new RSACryptoServiceProvider(RSA_KEY_LENGTH))
 				{
 					try
@@ -73,6 +76,7 @@ namespace prototype.src
 					}
 				}
 
+				Console.WriteLine("DATA CONSUMER");
 				DataConsumer dataConsumer = new DataConsumer();
 				dataConsumer.WorkHistroySmartContract = workHistroySmartContract;
 
