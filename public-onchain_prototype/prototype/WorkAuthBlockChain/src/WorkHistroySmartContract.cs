@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
-using System.Text;
-using Nethereum.Web3;
-using Nethereum.Hex.HexTypes;
-using Nethereum.Contracts;
-using Nethereum.RPC.Eth.DTOs;
 using System.Text.RegularExpressions;
+using Nethereum.Hex.HexTypes;
+using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Contracts;
+using Nethereum.Web3;
 
 namespace WorkAuthBlockChain
 {
@@ -33,11 +32,11 @@ namespace WorkAuthBlockChain
 		public const int LOGIN_TIMEOUT = 60;
 		private static readonly HexBigInteger GAS_LIMIT = new HexBigInteger(3000000);
 
-		private Web3 _web3 = new Web3();
+		private Nethereum.Web3.Web3 _web3 = new Web3();
 		private string _senderAddress;
 		private string _senderPassword;
 		private string _trasnactionHash;
-		private Contract _contract;
+		private Nethereum.Contracts.Contract _contract;
 
 		public RSACryptoServiceProvider RSA
 		{
@@ -100,7 +99,7 @@ namespace WorkAuthBlockChain
 
 		public string DataVaild(string data)
 		{
-			string[] dataSplit = data.Split(",");
+			string[] dataSplit = data.Split(',');
 			string error = "";
 			Regex urlRegex = new Regex(
 				@"^([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$",

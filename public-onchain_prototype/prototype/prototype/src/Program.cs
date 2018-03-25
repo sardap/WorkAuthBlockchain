@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
-using Nethereum.Web3;
 using WorkAuthBlockChain;
 using System.Collections.Generic;
 
@@ -19,7 +18,7 @@ namespace prototype.src
 			WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
 			RSACryptoServiceProvider rsa;
 			string address;
-			//string data = new string('*', DATA_LENGTH);
+			//string data = new string('*', DATA_LEN GTH);
 			string data = "paulsarda.com, IT Idiot";
 
 			Console.WriteLine("DATA CUSTODIAN");
@@ -87,7 +86,7 @@ namespace prototype.src
 			}
 		}
 
-		static void Main()
+		static void Main(string[] args)
 		{
 			MainAsync().GetAwaiter().GetResult();
 

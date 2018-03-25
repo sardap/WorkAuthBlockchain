@@ -44,7 +44,7 @@ namespace WorkAuthBlockChain
 		{
 			using (WebClient wc = new WebClient())
 			{
-				string jsonSource = wc.DownloadString("http://" + data.Split(",")[0] + "/PKNR.json");
+				string jsonSource = wc.DownloadString("http://" + data.Split(',')[0] + "/PKNR.json");
 
 				dynamic jsonParsed = JObject.Parse(jsonSource);
 

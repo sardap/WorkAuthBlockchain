@@ -9,6 +9,8 @@ namespace WorkAuthBlockChain
 {
 	public class DataCustodianPublisher
     {
+		private double _progress;
+
 		public RSACryptoServiceProvider RSA
 		{
 			get;
@@ -19,6 +21,14 @@ namespace WorkAuthBlockChain
 		{
 			get;
 			set;
+		}
+
+		public double Progress
+		{
+			get
+			{
+				return _progress;
+			}
 		}
 
 		private string EncyptData(string data)
@@ -34,14 +44,19 @@ namespace WorkAuthBlockChain
 			// This seems fucking dumb
 			string error = WorkHistroySmartContract.DataVaild(data);
 
-			if(error == "")
+			_progress += 10;
+
+			if (error == "")
 			{
 				bool unlockAcountResult = await WorkHistroySmartContract.UnlockAccount(senderAddress, senderPassword);
+				_progress += 10;
 
 				string encryptedData = EncyptData(data);
+				_progress += 10;
 
 				string trasnactionHash = await WorkHistroySmartContract.Deploy(encryptedData, data.GetHashCode());
-
+				_progress += 10;
+					
 				return trasnactionHash;
 			}
 			else
