@@ -25,7 +25,7 @@ namespace ProgramGUI
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private string _XMLString;
+		private string _xmlStringPath;
 
 
 		public MainWindow()
@@ -45,14 +45,14 @@ namespace ProgramGUI
 			WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
 			RSACryptoServiceProvider rsa;
 
-			ProgressLabel.Content = "Creating RSA";
+			ProgressLabel.Content = "Loading RSA";
 			using (rsa = new RSACryptoServiceProvider(Consts.RSA_KEY_LENGTH))
 			{
 				try
 				{
 					workHistroySmartContract.RSA = rsa;
 
-					rsa.FromXmlString(_XMLString);
+					rsa.FromXmlString(File.ReadAllText(_xmlStringPath));
 
 					DataCustodianPublisher dataCustodianPublisher = new DataCustodianPublisher();
 					dataCustodianPublisher.WorkHistroySmartContract = workHistroySmartContract;
@@ -84,8 +84,7 @@ namespace ProgramGUI
 			OpenFileDialog openFileDialog = new OpenFileDialog();
 			if (openFileDialog.ShowDialog() == true)
 			{
-				string path = openFileDialog.FileName;
-				_XMLString = File.ReadAllText(path);
+				_xmlStringPath = openFileDialog.FileName;
 			}
 		}
 
