@@ -68,6 +68,10 @@ namespace ProgramGUI
 					SmartContractLabel.Text = smartContractAddress;
 					submisionProgress.Value = 100;
 				}
+				catch(Exception ex)
+				{
+					MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				}
 				finally
 				{
 					rsa.PersistKeyInCsp = false;
@@ -83,25 +87,33 @@ namespace ProgramGUI
 				string path = openFileDialog.FileName;
 				_XMLString = File.ReadAllText(path);
 			}
-
 		}
 
 		private async void VerfiyDataClick(object sender, RoutedEventArgs e)
 		{
-			WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
+			DataVaildLabel.Content = "";
 
-			DataConsumer dataConsumer = new DataConsumer();
-			dataConsumer.WorkHistroySmartContract = workHistroySmartContract;
+			try
+			{
+				WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
 
-			// @Bad Should probalby not be a list of fucking bools
-			List<bool> verfiyResult = await dataConsumer.Verfiy(VaildateDataInput.Text, SmartContractAddressInput.Text);
+				DataConsumer dataConsumer = new DataConsumer();
+				dataConsumer.WorkHistroySmartContract = workHistroySmartContract;
 
-			string result = "";
+				// @Bad Should probalby not be a list of fucking bools
+				List<bool> verfiyResult = await dataConsumer.Verfiy(VaildateDataInput.Text, SmartContractAddressInput.Text);
 
-			result += "The data hash is " + verfiyResult[0];
-			result +=  "The data issuer is " + verfiyResult[1];
+				string result = "";
 
-			DataVaildLabel.Content += " " + result;
+				result += "The data hash is " + verfiyResult[0];
+				result += "The data issuer is " + verfiyResult[1];
+
+				DataVaildLabel.Content += " " + result;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
 		}
 	}
 }
