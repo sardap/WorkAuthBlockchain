@@ -1,0 +1,10 @@
+{
+    "Referees" : [
+        {"Address":"0x511d8ab3a771cea313d457b080346f34289b2d3b","Domain":"paulsarda.com","Department":"IT","Position":"HelpDesk","Name":"JohnSmith","ExtraData":"johnsmith@fake.com"}    
+    ],
+    "WorkHistory" : [
+        {"Address":"0xcefc4a800edde1d700328fabc9780d90d6fa9ec1","Domain":"paulsarda.com","Department":"HR","Position":"HelpDesk","Name":"PaulCoolGuy","ExtraData":"paulpual@fake.com"},
+        {"Address":"0x09166bf09b6ff1938ac4e6155a437e6b55481a93","Domain":"paulsarda.com","Department":"IT","Position":"LowLevelGarbage","Name":"PaulCoolGuy","ExtraData":"paulpual@fake.com"},
+        {"Address":"0x9ebd5edd4f431d15eba1f49748f40a8868fa88f6","Domain":"paulsarda.com","Department":"IT","Position":"HelpDesk","Name":"JohnSmith","ExtraData":"johnsmith@fake.com"}
+    ]
+}

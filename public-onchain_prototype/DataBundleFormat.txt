@@ -1,0 +1,11 @@
+{
+    "referees" : [
+        "address,domain,department,position,Name,ExtraData",
+        "address,domain,department,position,Name,ExtraData"        
+    ],
+    "work_history" : [
+        "address,domain,department,position,Name,ExtraData",
+        "address,domain,department,position,Name,ExtraData",
+        "address,domain,department,position,Name,ExtraData"                        
+    ]
+}
