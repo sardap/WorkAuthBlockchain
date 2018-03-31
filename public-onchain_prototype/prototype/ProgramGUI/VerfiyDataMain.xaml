@@ -5,13 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProgramGUI"
       mc:Ignorable="d" 
-      Title="VerfiyDataMain" d:DesignWidth="604.15">
+      Title="VerfiyDataMain">
 
 	<Grid>
 		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 			<Label Content="Verfiy data" HorizontalAlignment="Center" Foreground="#6ab2d2" FontSize="60"/>
-			<Label Content="Select a data file to verfiy" Foreground="#95989a" FontSize="15"  VerticalAlignment="Center" Padding="0,25,0,0" Margin="0,0,73,0"/>
-			<StackPanel Orientation="Horizontal">
+			<Label Content="Select a data file to verfiy" Foreground="#95989a" FontSize="15"  VerticalAlignment="Center" Padding="0,25,0,0" Margin="0,0,73,0" Width="535"/>
+			<StackPanel Orientation="Horizontal" Width="609">
 				<Grid Margin="0,0,0,0" x:Name="ProgressBox" >
 					<Border CornerRadius="10" Padding="2" Grid.Column="1" Width="420" Height="50" RenderTransformOrigin="0.844,0.439"  HorizontalAlignment="Center" >
 						<Border.Background>
@@ -29,8 +29,8 @@
 						</TextBox>
 					</Border>
 				</Grid>
-				<Grid Margin="0,0,0,0" >
-					<Border CornerRadius="10" Padding="2" Width="168" Height="45" RenderTransformOrigin="0.844,0.439"  HorizontalAlignment="Center" Margin="10,2,74,2" >
+				<Grid>
+					<Border CornerRadius="10" Padding="2" Width="174" Height="45" RenderTransformOrigin="0.844,0.439"  HorizontalAlignment="Center" Margin="10,2,0,2" >
 						<Border.Background>
 							<LinearGradientBrush StartPoint="0,0" EndPoint="0,0">
 								<GradientStop Color="#6ab2d2" Offset="0" />
@@ -40,7 +40,7 @@
 						<Button Cursor="Hand" x:Name="Browse" BorderBrush="Transparent" Background="#6ab2d2" Foreground="White" FontSize="15" Content="BROWSE" Click="BrowseClick">
 							<Button.Resources>
 								<Style TargetType="{x:Type Border}">
-									<Setter Property="CornerRadius" Value="50"/>
+									<Setter Property="CornerRadius" Value="10"/>
 								</Style>
 							</Button.Resources>
 						</Button>
@@ -48,7 +48,7 @@
 				</Grid>
 			</StackPanel>
 
-			<StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+			<StackPanel Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Center" Width="602">
 				<Grid Margin="0,0,0,0">
 					<Border CornerRadius="10" Padding="2" Grid.Column="1" Width="296" Height="90" RenderTransformOrigin="0.844,0.439"  HorizontalAlignment="Center" >
 						<Border.Background>
