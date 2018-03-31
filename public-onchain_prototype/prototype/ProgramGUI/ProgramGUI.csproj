@@ -103,9 +103,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CreateData.xaml.cs">
+      <DependentUpon>CreateData.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataSubject.xaml.cs">
       <DependentUpon>DataSubject.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VaildDataList.xaml.cs">
+      <DependentUpon>VaildDataList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VerfiyDataMain.xaml.cs">
+      <DependentUpon>VerfiyDataMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VerfiyScreen.xaml.cs">
+      <DependentUpon>VerfiyScreen.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CreateData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Employer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -122,8 +138,34 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VaildDataList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VerfiyDataMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VerfiyScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

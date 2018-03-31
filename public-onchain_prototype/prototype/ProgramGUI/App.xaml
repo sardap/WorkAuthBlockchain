@@ -2,8 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ProgramGUI"
-             StartupUri="Employer.xaml">
+             StartupUri="Main.xaml">
     <Application.Resources>
-         
-    </Application.Resources>
+		<Style TargetType="{x:Type Window}">
+			<Setter Property="FontFamily" Value="San Francisco Display" />
+		</Style>
+	</Application.Resources>
 </Application>

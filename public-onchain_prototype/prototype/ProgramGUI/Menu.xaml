@@ -1,0 +1,52 @@
+﻿<Page x:Class="ProgramGUI.Menu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ProgramGUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1366"
+      Title="Menu">
+
+    <Grid>
+		<StackPanel VerticalAlignment="Center">
+			<Label Content="Welcome to Work Auth blockchain" HorizontalAlignment="Center" FontSize="60"/>
+			<Grid Margin="0,50,0,0">
+				<Border CornerRadius="10" Padding="2" Grid.Column="1" Width="400" Height="80" RenderTransformOrigin="0.844,0.439"  HorizontalAlignment="Center" >
+					<Border.Background>
+						<LinearGradientBrush StartPoint="0,0" EndPoint="0,0">
+							<GradientStop Color="#FF61CF89" Offset="0" />
+							<GradientStop Color="#FF61CF89" Offset="0.75" />
+						</LinearGradientBrush>
+					</Border.Background>
+					<Button Cursor="Hand" x:Name="CreateData" BorderBrush="Transparent" Background="White" Foreground="#FF61CF89" FontSize="24" Content="CREATE DATA" Click="CreateDataClick">
+						<Button.Resources>
+							<Style TargetType="{x:Type Border}">
+								<Setter Property="CornerRadius" Value="10"/>
+							</Style>
+						</Button.Resources>
+					</Button>
+				</Border>
+
+			</Grid>
+			<Grid Margin="0,50,0,0">
+				<Border CornerRadius="10" Padding="2" Grid.Column="1" Width="400" Height="80" RenderTransformOrigin="0.844,0.439"  HorizontalAlignment="Center" >
+					<Border.Background>
+						<LinearGradientBrush StartPoint="0,0" EndPoint="0,0">
+							<GradientStop Color="#6ab2d2" Offset="0" />
+							<GradientStop Color="#6ab2d2" Offset="0.75" />
+						</LinearGradientBrush>
+					</Border.Background>
+					<Button Cursor="Hand" x:Name="VerfiyData" BorderBrush="Transparent" Background="White" Foreground="#6ab2d2" FontSize="24" Content="VERIFY DATA" Click="VerfiyDataClick">
+						<Button.Resources>
+							<Style TargetType="{x:Type Border}">
+								<Setter Property="CornerRadius" Value="10"/>
+							</Style>
+						</Button.Resources>
+					</Button>
+				</Border>
+
+			</Grid>
+		</StackPanel>
+	</Grid>
+</Page>

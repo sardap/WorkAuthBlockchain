@@ -1,0 +1,44 @@
+﻿<Page x:Class="ProgramGUI.VerfiyScreen"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ProgramGUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="VerfiyScreen">
+
+    <Grid>
+		<StackPanel>
+			<Label Content="Vaild data" HorizontalAlignment="Center" Foreground="#6ab2d2" FontSize="60"/>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<Grid Margin="0,0,0,0">
+					<Border CornerRadius="10" Padding="2" Grid.Column="1" Width="100" Height="30" RenderTransformOrigin="0.844,0.439"  HorizontalAlignment="Center" >
+						<Button Cursor="Hand" x:Name="RefereeButton" BorderBrush="Transparent" Background="#6ab2d2" Foreground="White" FontSize="15" Content="Referees" Click="SwitchToRefeeres">
+							<Button.Resources>
+								<Style TargetType="{x:Type Border}">
+									<Setter Property="CornerRadius" Value="10"/>
+								</Style>
+							</Button.Resources>
+						</Button>
+					</Border>
+				</Grid>
+
+				<Grid Margin="126,0,0,0">
+					<Border CornerRadius="10" Padding="2" Grid.Column="1" Width="100" Height="30" RenderTransformOrigin="0.844,0.439"  HorizontalAlignment="Center" >
+						<Button Cursor="Hand" x:Name="WorkHistoryButton" BorderBrush="Transparent" Background="White" Foreground="#7d7d7d" FontSize="15" Content="Work history" Click="SwitchToWorkHistory">
+							<Button.Resources>
+								<Style TargetType="{x:Type Border}">
+									<Setter Property="CornerRadius" Value="10"/>
+								</Style>
+							</Button.Resources>
+						</Button>
+					</Border>
+				</Grid>
+			</StackPanel>
+			<DockPanel>
+				<Frame x:Name="VaildDataConetet" />
+			</DockPanel>
+		</StackPanel>
+    </Grid>
+</Page>

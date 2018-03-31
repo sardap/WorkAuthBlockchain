@@ -36,7 +36,6 @@ namespace ProgramGUI
 
 		private async void PushDataClick(object sender, RoutedEventArgs e)
 		{
-
 			submisionProgress.Value = 0;
 			Entry entry = new Entry
 			{
@@ -133,8 +132,10 @@ namespace ProgramGUI
 			{
 				WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
 
-				DataConsumer dataConsumer = new DataConsumer();
-				dataConsumer.WorkHistroySmartContract = workHistroySmartContract;
+				DataConsumer dataConsumer = new DataConsumer
+				{
+					WorkHistroySmartContract = workHistroySmartContract
+				};
 
 				OpenFileDialog openFileDialog = new OpenFileDialog();
 				if (openFileDialog.ShowDialog() == true)

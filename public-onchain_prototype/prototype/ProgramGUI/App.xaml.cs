@@ -17,9 +17,6 @@ namespace ProgramGUI
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
-
-			DataSubjectWindow window = new DataSubjectWindow();
-			window.Show();
 		}
 	}
 }

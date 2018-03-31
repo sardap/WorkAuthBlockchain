@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp1
+namespace ProgramGUI
 {
 	/// <summary>
-	/// Interaction logic for MainWindow.xaml
+	/// Interaction logic for Main.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class Main : Window
 	{
-		public MainWindow()
+		public Main()
 		{
 			InitializeComponent();
+			ContentArea.Content = new Menu();
 		}
 	}
 }
