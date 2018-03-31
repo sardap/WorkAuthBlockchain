@@ -6,11 +6,15 @@
       xmlns:local="clr-namespace:ProgramGUI"
       mc:Ignorable="d" 
       d:DesignHeight="768" d:DesignWidth="1366"
-      Title="Menu">
+      Title="Work Auth Blockchain">
 
     <Grid>
 		<StackPanel VerticalAlignment="Center">
-			<Label Content="Welcome to Work Auth blockchain" HorizontalAlignment="Center" FontSize="60"/>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<Label Content="Welcome to " HorizontalAlignment="Center" Foreground="#95989a" FontSize="60"/>
+				<Label Content="Work Auth blockchain" HorizontalAlignment="Center" Foreground="#6ab2d2" FontSize="60"/>
+
+			</StackPanel>
 			<Grid Margin="0,50,0,0">
 				<Border CornerRadius="10" Padding="2" Grid.Column="1" Width="400" Height="80" RenderTransformOrigin="0.844,0.439"  HorizontalAlignment="Center" >
 					<Border.Background>

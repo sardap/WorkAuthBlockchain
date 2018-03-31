@@ -29,8 +29,7 @@ namespace ProgramGUI
 			get;
 			set;
 		}
-
-
+		
 		public VerfiyScreen()
         {
             InitializeComponent();
