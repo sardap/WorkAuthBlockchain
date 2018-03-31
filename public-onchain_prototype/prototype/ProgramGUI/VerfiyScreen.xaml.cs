@@ -21,24 +21,8 @@ namespace ProgramGUI
     /// </summary>
     public partial class VerfiyScreen : Page
     {
-		private static Color UnselctedColor
-		{
-			get
-			{
-				return Color.FromArgb(0x7d, 0x7d, 0x7d, 0);
-			}
-		}
-
-		private static Color SelectedColor
-		{
-			get
-			{
-				return Color.FromArgb(0x7d, 0x7d, 0x7d, 0);
-			}
-		}
-
-
 		private VaildDataList _vaildDataList = new VaildDataList();
+		private Button _selected;
 
 		public DataBundle DataBundle
 		{
@@ -52,6 +36,7 @@ namespace ProgramGUI
             InitializeComponent();
 
 			VaildDataConetet.Content = _vaildDataList;
+			_selected = RefereeButton;
 		}
 
 		public VerfiyScreen(DataBundle dataBundle) : this()
@@ -79,16 +64,24 @@ namespace ProgramGUI
 			b.Background = tempBackground;
 		}
 
+		private void ProcessButton(Button button, List<Entry> entries)
+		{
+			if (_selected != button)
+			{
+				ChangeList(entries);
+				SwitchButtonColors(_selected, button);
+				_selected = button;
+			}
+		}
+
 		private void SwitchToRefeeres(object sender, RoutedEventArgs e)
 		{
-			ChangeList(DataBundle.Referees);
-			SwitchButtonColors(WorkHistoryButton, RefereeButton);
+			ProcessButton(RefereeButton, DataBundle.Referees);
 		}
 
 		private void SwitchToWorkHistory(object sender, RoutedEventArgs e)
 		{
-			ChangeList(DataBundle.WorkHistory);
-			SwitchButtonColors(WorkHistoryButton, RefereeButton);
+			ProcessButton(WorkHistoryButton, DataBundle.WorkHistory);
 		}
 	}
 }
