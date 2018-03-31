@@ -32,7 +32,7 @@
 								<GradientStop Color="#95989a" Offset="0.75" />
 							</LinearGradientBrush>
 						</Border.Background>
-						<TextBox Cursor="Hand" x:Name="DomainEntry" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Enter domain here..."  TextAlignment="Left" >
+						<TextBox Cursor="Hand" x:Name="DomainEntry" Padding="5,0,0,0" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Enter domain here..."  TextAlignment="Left" >
 							<TextBox.Resources>
 								<Style TargetType="{x:Type Border}">
 									<Setter Property="CornerRadius" Value="10"/>
@@ -50,7 +50,7 @@
 								<GradientStop Color="#95989a" Offset="0.75" />
 							</LinearGradientBrush>
 						</Border.Background>
-						<TextBox Cursor="Hand" x:Name="DeparmentEntry" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Enter deparment here..." TextAlignment="Left" >
+						<TextBox Cursor="Hand" x:Name="DeparmentEntry" Padding="5,0,0,0" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Enter deparment here..." TextAlignment="Left" >
 							<TextBox.Resources>
 								<Style TargetType="{x:Type Border}">
 									<Setter Property="CornerRadius" Value="10"/>
@@ -68,7 +68,7 @@
 								<GradientStop Color="#95989a" Offset="0.75" />
 							</LinearGradientBrush>
 						</Border.Background>
-						<TextBox Cursor="Hand" x:Name="PostionEntry" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Enter postion here..." TextAlignment="Left" >
+						<TextBox Cursor="Hand" x:Name="PostionEntry" Padding="5,0,0,0" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Enter postion here..." TextAlignment="Left" >
 							<TextBox.Resources>
 								<Style TargetType="{x:Type Border}">
 									<Setter Property="CornerRadius" Value="10"/>
@@ -86,7 +86,7 @@
 								<GradientStop Color="#95989a" Offset="0.75" />
 							</LinearGradientBrush>
 						</Border.Background>
-						<TextBox Cursor="Hand" x:Name="NameEntry" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Enter full name here..." TextAlignment="Left" >
+						<TextBox Cursor="Hand" x:Name="NameEntry" Padding="5,0,0,0" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Enter full name here..." TextAlignment="Left" >
 							<TextBox.Resources>
 								<Style TargetType="{x:Type Border}">
 									<Setter Property="CornerRadius" Value="10"/>
@@ -108,7 +108,7 @@
 								<GradientStop Color="#95989a" Offset="0.75" />
 							</LinearGradientBrush>
 						</Border.Background>
-						<TextBox Cursor="Hand" x:Name="ExtraInfoEntry" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Enter extra information here..." TextAlignment="Left" >
+						<TextBox Cursor="Hand" x:Name="ExtraInfoEntry" Padding="5,0,0,0" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Enter extra information here..." TextAlignment="Left" >
 							<TextBox.Resources>
 								<Style TargetType="{x:Type Border}">
 									<Setter Property="CornerRadius" Value="10"/>
@@ -126,7 +126,7 @@
 								<GradientStop Color="#95989a" Offset="0.75" />
 							</LinearGradientBrush>
 						</Border.Background>
-						<TextBox Cursor="Hand" x:Name="EthereumEntry" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Enter ethereum address here..." TextAlignment="Left" >
+						<TextBox Cursor="Hand" x:Name="EthereumEntry" Padding="5,0,0,0" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Enter ethereum address here..." TextAlignment="Left" >
 							<TextBox.Resources>
 								<Style TargetType="{x:Type Border}">
 									<Setter Property="CornerRadius" Value="10"/>
@@ -146,10 +146,10 @@
 									<GradientStop Color="#95989a" Offset="0.75" />
 								</LinearGradientBrush>
 							</Border.Background>
-							<PasswordBox Cursor="Hand" x:Name="GethEntry" BorderBrush="#95989a" Foreground="#95989a" FontSize="30"  >
+							<PasswordBox Cursor="Hand" x:Name="GethEntry" Padding="5,0,0,0" BorderBrush="#95989a" Foreground="#95989a" FontSize="30"  >
 								<PasswordBox.Resources>
 									<Style TargetType="{x:Type Border}">
-										<Setter Property="CornerRadius" Value="10"/>
+										<Setter Property="CornerRadius" Value="13"/>
 									</Style>
 								</PasswordBox.Resources>
 							</PasswordBox>
@@ -224,7 +224,7 @@
 						<GradientStop Color="#95989a" Offset="0.75" />
 					</LinearGradientBrush>
 				</Border.Background>
-				<TextBox IsReadOnly="True" Cursor="Hand" x:Name="ProgressEntry" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Progress..." TextAlignment="Center" >
+				<TextBox IsReadOnly="True" Cursor="Hand" x:Name="ProgressEntry" Padding="5,0,0,0" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Progress..." TextAlignment="Center" >
 					<TextBox.Resources>
 						<Style TargetType="{x:Type Border}">
 							<Setter Property="CornerRadius" Value="10"/>
