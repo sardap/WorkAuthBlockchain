@@ -15,23 +15,24 @@ namespace WorkAuthBlockChain
 			set;
 		}
 
-		public async Task<List<bool>> Verfiy(string data, string address)
+		public async Task<VerfiyResult> Verfiy(string data, string address)
 		{
-			string error = WorkHistroySmartContract.DataVaild(data);
+			string error = WorkHistroySmartContract.DataValid(data);
 
 			if(error == "")
 			{
-				List<bool> testsPassed = new List<bool>();
-
 				WorkHistroySmartContract.LoadContract(address);
-				testsPassed.Add(await CheckHashes(data));
-				testsPassed.Add(await CompareSender(data));
+				VerfiyResult result = new VerfiyResult
+				{
+					Sender = await CheckHashes(data),
+					Data = await CompareSender(data)
+				};
 
-				return testsPassed;
+				return result;
 			}
 			else
 			{
-				throw new WorkHistroySmartContractInvaildDataException(error);
+				throw new WorkHistroySmartContractInValidDataException(error);
 			}
 		}
 

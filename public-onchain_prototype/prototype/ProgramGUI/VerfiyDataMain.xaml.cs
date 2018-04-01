@@ -63,10 +63,7 @@ namespace ProgramGUI
 			{
 				DataBundle dataBundle = await ReadDataBundle();
 
-				VerfiyScreen verfiyScreen = new VerfiyScreen
-				{
-					DataBundle = dataBundle
-				};
+				VerfiyScreen verfiyScreen = new VerfiyScreen(dataBundle);
 
 				Main main = (Main)Window.GetWindow(this);
 				main.Content = verfiyScreen;

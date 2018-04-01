@@ -21,7 +21,7 @@ namespace ProgramGUI
     /// </summary>
     public partial class VerfiyScreen : Page
     {
-		private VaildDataList _vaildDataList = new VaildDataList();
+		private ValidDataList _ValidDataList = new ValidDataList();
 		private Button _selected;
 
 		public DataBundle DataBundle
@@ -30,24 +30,40 @@ namespace ProgramGUI
 			set;
 		}
 		
-		public VerfiyScreen()
+		public VerfiyScreen(DataBundle dataBundle)
         {
             InitializeComponent();
 
-			VaildDataConetet.Content = _vaildDataList;
+			DataBundle = dataBundle;
+			ValidDataConetet.Content = _ValidDataList;
 			_selected = RefereeButton;
+			ChangeList(dataBundle.Referees);
 		}
 
-		public VerfiyScreen(DataBundle dataBundle) : this()
+		private void ShowWarning(UIElement uIElement, bool condtion)
 		{
-			DataBundle = dataBundle;
-			ChangeList(dataBundle.Referees);
+			Visibility visibility;
+
+			if (condtion)
+			{
+				visibility = Visibility.Visible;
+			}
+			else
+			{
+				visibility = Visibility.Hidden;
+			}
+
+			uIElement.Visibility = visibility;
 		}
 
 		private void ChangeList(List<Entry> entries)
 		{
-			_vaildDataList.Entries = entries;
-			_vaildDataList.BindData();
+			_ValidDataList.Entries = entries;
+			_ValidDataList.BindData();
+
+			ShowWarning(NameMissMatchLabel, !_ValidDataList.NamesMatch());
+			ShowWarning(AllDataValid, !_ValidDataList.DataValid());
+			ShowWarning(AllSendersValid, !_ValidDataList.SendersValid());
 		}
 
 		// This is really fucking stupid how can i not find just a fucking swap im i fucking idiot

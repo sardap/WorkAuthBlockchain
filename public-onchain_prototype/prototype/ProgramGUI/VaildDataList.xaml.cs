@@ -1,34 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Linq;
+using System.Windows.Forms;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WorkAuthBlockChain;
 using WorkAuthBlockChain.src;
 
 namespace ProgramGUI
 {
     /// <summary>
-    /// Interaction logic for VaildDataList.xaml
+    /// Interaction logic for ValidDataList.xaml
     /// </summary>
-    public partial class VaildDataList : Page
+    public partial class ValidDataList : Page
     {
+		private bool _dataValid;
+		private bool _sendersValid;
+
 		public List<Entry> Entries
 		{
 			get;
 			set;
 		}
 
-        public VaildDataList()
+		public bool NamesMatch()
+		{
+			return Entries.All(i => i.Name == Entries.First().Name);
+		}
+
+		public bool DataValid()
+		{
+			return _dataValid;
+		}
+
+		public bool SendersValid()
+		{
+			return _sendersValid;
+		}
+
+		public ValidDataList()
         {
             InitializeComponent();
 		}
@@ -37,7 +47,10 @@ namespace ProgramGUI
 		{
 			try
 			{
-				DataLabel.Content = "";
+				_dataValid = true;
+				_sendersValid = true;
+
+				listView.Items.Clear();
 
 				WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
 
@@ -48,23 +61,42 @@ namespace ProgramGUI
 
 				foreach (Entry entry in Entries)
 				{
-					DataLabel.Content += await VerfiyEntry(dataConsumer, entry);
+					VerfiyResult verfiyResult = await dataConsumer.Verfiy(entry.OnChainString(), entry.Address);
+
+					VerfiyEntry verfiyEntry = new VerfiyEntry(entry)
+					{
+						SenderValid = verfiyResult.Sender,
+						DataValid = verfiyResult.Data
+					};
+
+					if (!verfiyEntry.DataValid)
+					{
+						_dataValid = false;
+					}
+
+					if (!verfiyEntry.SenderValid)
+					{
+						_sendersValid = false;
+					}
+
+					listView.Items.Add(verfiyEntry);
 				}
 
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				System.Windows.MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
 
-		private async Task<string> VerfiyEntry(DataConsumer dataConsumer, Entry entry)
+		/*
+		private async Task<bool> VerfiyEntry(DataConsumer dataConsumer, Entry entry)
 		{
 			List<bool> verfiyResult = await dataConsumer.Verfiy(entry.OnChainString(), entry.Address);
 
 			string result = "\n";
 
-			result += "Data is " + (verfiyResult[0] ? "Vaild" : "Invaild") + " Sender is " + (verfiyResult[1] ? "Vaild" : "Invaild") + "\n";
+			result += "Data is " + (verfiyResult[0] ? "Valid" : "InValid") + " Sender is " + (verfiyResult[1] ? "Valid" : "InValid") + "\n";
 			result += "Address:\t" + entry.Address + "\n";
 			result += "Domain:\t\t" + entry.Domain + "\n";
 			result += "Department:\t" + entry.Department + "\n";
@@ -74,6 +106,6 @@ namespace ProgramGUI
 
 			return result;
 		}
-
+		*/
 	}
 }

@@ -10,17 +10,17 @@ using Nethereum.Web3;
 namespace WorkAuthBlockChain
 {
 
-	public class WorkHistroySmartContractInvaildDataException : Exception
+	public class WorkHistroySmartContractInValidDataException : Exception
 	{
-		public WorkHistroySmartContractInvaildDataException()
+		public WorkHistroySmartContractInValidDataException()
 		{
 		}
 
-		public WorkHistroySmartContractInvaildDataException(string message) : base(message)
+		public WorkHistroySmartContractInValidDataException(string message) : base(message)
 		{
 		}
 
-		public WorkHistroySmartContractInvaildDataException(string message, Exception inner) : base(message, inner)
+		public WorkHistroySmartContractInValidDataException(string message, Exception inner) : base(message, inner)
 		{
 		}
 	}
@@ -97,7 +97,7 @@ namespace WorkAuthBlockChain
 			return creatorAddress;
 		}
 
-		public string DataVaild(string data)
+		public string DataValid(string data)
 		{
 			string[] dataSplit = data.Split(',');
 			string error = "";

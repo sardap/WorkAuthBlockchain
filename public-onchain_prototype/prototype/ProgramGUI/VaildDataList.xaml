@@ -1,13 +1,26 @@
-﻿<Page x:Class="ProgramGUI.VaildDataList"
+﻿<Page x:Class="ProgramGUI.ValidDataList"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProgramGUI"
       mc:Ignorable="d" 
-      Title="VaildDataList">
+      Title="ValidDataList">
 
 	<Grid>
-		<Label x:Name="DataLabel" Foreground="#7d7d7d"  />
+		<ListView x:Name="listView">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>
+					<GridViewColumn Header="Domain" DisplayMemberBinding="{Binding Domain}"/>
+					<GridViewColumn Header="Department" DisplayMemberBinding="{Binding Department}"/>
+					<GridViewColumn Header="Position" DisplayMemberBinding="{Binding Position}"/>
+					<GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+					<GridViewColumn Header="ExtraData" DisplayMemberBinding="{Binding ExtraData}"/>
+					<GridViewColumn Header="Sender Valid" DisplayMemberBinding="{Binding SenderValidString}"/>
+					<GridViewColumn Header="Data Valid" DisplayMemberBinding="{Binding DataValidString}"/>
+				</GridView>
+			</ListView.View>
+		</ListView>
 	</Grid>
 </Page>

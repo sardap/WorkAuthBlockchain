@@ -42,7 +42,7 @@ namespace WorkAuthBlockChain
 		public async Task<string> PublishWorkHistoryAsync(string data, string senderAddress, string senderPassword)
 		{
 			// This seems fucking dumb
-			string error = WorkHistroySmartContract.DataVaild(data);
+			string error = WorkHistroySmartContract.DataValid(data);
 
 			_progress += 10;
 
@@ -61,7 +61,7 @@ namespace WorkAuthBlockChain
 			}
 			else
 			{
-				throw new WorkHistroySmartContractInvaildDataException(error);
+				throw new WorkHistroySmartContractInValidDataException(error);
 			}
 		}
 

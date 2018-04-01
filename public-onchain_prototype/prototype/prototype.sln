@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkAuthBlockChain", "WorkA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{8BB86703-0906-4B63-81D4-72D19D92E026}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramGUI", "ProgramGUI\ProgramGUI.csproj", "{CC4B71C8-42F8-41E7-B3BD-030D707851CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployerGUI", "ProgramGUI\EmployerGUI.csproj", "{CC4B71C8-42F8-41E7-B3BD-030D707851CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarking", "Benchmarking\Benchmarking.csproj", "{FF25DF30-27BA-4745-9DCC-9CD09193E381}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmarking", "Benchmarking\Benchmarking.csproj", "{FF25DF30-27BA-4745-9DCC-9CD09193E381}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

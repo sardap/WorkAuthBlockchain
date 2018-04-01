@@ -80,9 +80,9 @@ namespace prototype.src
 				dataConsumer.WorkHistroySmartContract = workHistroySmartContract;
 
 				// @Bad Should probalby not be a list of fucking bools
-				List<bool> verfiyResult = await dataConsumer.Verfiy(data, address);
-				Console.WriteLine("The data hash is {0}", verfiyResult[0]);
-				Console.WriteLine("The data issuer is {0}", verfiyResult[1]);
+				VerfiyResult verfiyResult = await dataConsumer.Verfiy(data, address);
+				Console.WriteLine("The data hash is {0}", verfiyResult.Data);
+				Console.WriteLine("The data issuer is {0}", verfiyResult.Sender);
 			}
 		}
 
