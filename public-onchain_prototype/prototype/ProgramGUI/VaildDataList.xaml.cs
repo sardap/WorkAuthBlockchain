@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Windows.Controls;
 using WorkAuthBlockChain;
 using WorkAuthBlockChain.src;
+using System.Threading.Tasks;
 
 namespace ProgramGUI
 {
@@ -43,7 +44,7 @@ namespace ProgramGUI
             InitializeComponent();
 		}
 
-		public async void BindData()
+		public async Task BindData()
 		{
 			try
 			{

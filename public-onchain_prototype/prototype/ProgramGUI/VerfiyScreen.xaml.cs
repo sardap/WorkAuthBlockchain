@@ -56,10 +56,10 @@ namespace ProgramGUI
 			uIElement.Visibility = visibility;
 		}
 
-		private void ChangeList(List<Entry> entries)
+		private async void ChangeList(List<Entry> entries)
 		{
 			_ValidDataList.Entries = entries;
-			_ValidDataList.BindData();
+			await _ValidDataList.BindData();
 
 			ShowWarning(NameMissMatchLabel, !_ValidDataList.NamesMatch());
 			ShowWarning(AllDataValid, !_ValidDataList.DataValid());
@@ -97,6 +97,13 @@ namespace ProgramGUI
 		private void SwitchToWorkHistory(object sender, RoutedEventArgs e)
 		{
 			ProcessButton(WorkHistoryButton, DataBundle.WorkHistory);
+		}
+
+		private void BackClick(object sender, RoutedEventArgs e)
+		{
+			Main main = (Main)Window.GetWindow(this);
+			main.Content = new VerfiyDataMain();
+
 		}
 	}
 }

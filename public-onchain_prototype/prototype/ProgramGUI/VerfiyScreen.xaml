@@ -40,7 +40,7 @@
 			<StackPanel HorizontalAlignment="Center">
 				<StackPanel x:Name="NameMissMatchLabel" Orientation="Horizontal">
 					<Label Content="Names Match				=" HorizontalAlignment="Center" Foreground="#7d7d7d" FontSize="15"/>
-					<Label  Content="TRUE" HorizontalAlignment="Center" Foreground="#ff0000" FontSize="15"/>
+					<Label  Content="FALSE" HorizontalAlignment="Center" Foreground="#ff0000" FontSize="15"/>
 				</StackPanel>
 				<StackPanel x:Name="AllSendersValid" Orientation="Horizontal" HorizontalAlignment="Left">
 					<Label Content="Senders Invalid		=" HorizontalAlignment="Center" Foreground="#7d7d7d" FontSize="15"/>
@@ -55,6 +55,20 @@
 			<DockPanel>
 				<Frame Padding="150,5,150,0" x:Name="ValidDataConetet" />
 			</DockPanel>
+
 		</StackPanel>
+
+		<Grid Margin="25,0,0,25" VerticalAlignment="Bottom" HorizontalAlignment="Left" >
+			<Border CornerRadius="10" Padding="2" Grid.Column="1" Width="70" Height="30" RenderTransformOrigin="0.844,0.439"  HorizontalAlignment="Center" >
+				<Button Cursor="Hand" x:Name="Back" BorderBrush="Transparent" Background="White" Foreground="#7d7d7d" FontSize="15" Content="Back" Click="BackClick">
+					<Button.Resources>
+						<Style TargetType="{x:Type Border}">
+							<Setter Property="CornerRadius" Value="10"/>
+						</Style>
+					</Button.Resources>
+				</Button>
+			</Border>
+		</Grid>
+
 	</Grid>
 </Page>

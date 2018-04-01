@@ -17,8 +17,8 @@
 					<GridViewColumn Header="Position" DisplayMemberBinding="{Binding Position}"/>
 					<GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
 					<GridViewColumn Header="ExtraData" DisplayMemberBinding="{Binding ExtraData}"/>
-					<GridViewColumn Header="Sender Valid" DisplayMemberBinding="{Binding SenderValidString}"/>
-					<GridViewColumn Header="Data Valid" DisplayMemberBinding="{Binding DataValidString}"/>
+					<GridViewColumn Header="Sender Valid" DisplayMemberBinding="{Binding SenderValid}"/>
+					<GridViewColumn Header="Data Valid" DisplayMemberBinding="{Binding DataValid}"/>
 				</GridView>
 			</ListView.View>
 		</ListView>

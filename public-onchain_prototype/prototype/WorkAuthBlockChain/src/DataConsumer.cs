@@ -22,10 +22,11 @@ namespace WorkAuthBlockChain
 			if(error == "")
 			{
 				WorkHistroySmartContract.LoadContract(address);
+
 				VerfiyResult result = new VerfiyResult
 				{
-					Sender = await CheckHashes(data),
-					Data = await CompareSender(data)
+					Sender = await CompareSender(data),
+					Data = await CheckHashes(data)
 				};
 
 				return result;
@@ -45,7 +46,9 @@ namespace WorkAuthBlockChain
 		{
 			using (WebClient wc = new WebClient())
 			{
-				string jsonSource = wc.DownloadString("http://" + data.Split(',')[0] + "/PKNR.json");
+				string URL = "http://" + data.Split(',')[0] + "/PKNR.json";
+
+				string jsonSource = wc.DownloadString(URL);
 
 				dynamic jsonParsed = JObject.Parse(jsonSource);
 

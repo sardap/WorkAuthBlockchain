@@ -13,21 +13,6 @@ namespace ProgramGUI
 	{
 		public bool SenderValid { get; set; }
 		public bool DataValid { get; set; }
-		public string SenderValidString
-		{
-			get
-			{
-				return SenderValid ? "yes" : "no";
-			}
-		}
-		public string DataValidString
-		{
-			get
-			{
-				return SenderValid ? "yes" : "no";
-			}
-		}
-
 		public string Address { get; set; }
 		public string Domain { get; set; }
 		public string Department { get; set; }
