@@ -9,8 +9,6 @@ namespace WorkAuthBlockChain
 {
 	public class DataProdcuer
     {
-		private double _progress;
-
 		public RSACryptoServiceProvider RSA
 		{
 			get;
@@ -44,18 +42,13 @@ namespace WorkAuthBlockChain
 			// This seems fucking dumb
 			string error = WorkHistroySmartContract.DataValid(data);
 
-			_progress += 10;
-
 			if (error == "")
 			{
 				bool unlockAcountResult = await WorkHistroySmartContract.UnlockAccount(senderAddress, senderPassword);
-				_progress += 10;
 
 				string encryptedData = EncyptData(data);
-				_progress += 10;
 
 				string trasnactionHash = await WorkHistroySmartContract.Deploy(encryptedData, data.GetHashCode());
-				_progress += 10;
 					
 				return trasnactionHash;
 			}
