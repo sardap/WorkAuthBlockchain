@@ -40,7 +40,6 @@ namespace WorkAuthBlockChain
 
 		private async Task<bool> CheckHashes(string data)
 		{
-			//Compare Contetnes not arrays 
 			return Utils.GetHash(data).SequenceEqual(await WorkHistroySmartContract.GetHash());
 		}
 

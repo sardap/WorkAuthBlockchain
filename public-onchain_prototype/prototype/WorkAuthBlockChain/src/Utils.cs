@@ -10,7 +10,7 @@ namespace WorkAuthBlockChain
     {
 		public static byte[] GetHash(string data)
 		{
-			MD5 md5 = MD5.Create();
+			SHA256 md5 = SHA256.Create();
 
 			byte[] bytes = md5.ComputeHash(Encoding.UTF8.GetBytes(data));
 
