@@ -21,14 +21,6 @@ namespace WorkAuthBlockChain
 			set;
 		}
 
-		public double Progress
-		{
-			get
-			{
-				return _progress;
-			}
-		}
-
 		private string EncyptData(string data)
 		{
 			byte[] dataInBytes = Encoding.UTF8.GetBytes(data);
