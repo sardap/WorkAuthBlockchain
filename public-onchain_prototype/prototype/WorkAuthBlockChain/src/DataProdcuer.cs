@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Numerics;
 
 namespace WorkAuthBlockChain
 {
@@ -40,7 +41,7 @@ namespace WorkAuthBlockChain
 
 				string encryptedData = EncyptData(data);
 
-				string trasnactionHash = await WorkHistroySmartContract.Deploy(encryptedData, data.GetHashCode());
+				string trasnactionHash = await WorkHistroySmartContract.Deploy(encryptedData, Utils.GetHash(data));
 					
 				return trasnactionHash;
 			}
@@ -52,7 +53,7 @@ namespace WorkAuthBlockChain
 
 		public async Task<bool> CompareHashAsync(string data)
 		{
-			return data.GetHashCode() == await WorkHistroySmartContract.GetHash();
+			return Utils.GetHash(data) == await WorkHistroySmartContract.GetHash();
 		}
 
 	}

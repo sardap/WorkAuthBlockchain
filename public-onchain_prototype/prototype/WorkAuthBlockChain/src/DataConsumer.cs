@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,8 @@ namespace WorkAuthBlockChain
 
 		private async Task<bool> CheckHashes(string data)
 		{
-			return data.GetHashCode() == await WorkHistroySmartContract.GetHash();
+			//Compare Contetnes not arrays 
+			return Utils.GetHash(data).SequenceEqual(await WorkHistroySmartContract.GetHash());
 		}
 
 		private async Task<bool> CompareSender(string data)
