@@ -38,7 +38,7 @@ namespace ProgramGUI
 
 		}
 
-		private async Task<Entry> CreateAndPopluateEntry()
+		private Entry CreateAndPopluateEntry()
 		{
 			return new Entry
 			{
@@ -57,7 +57,7 @@ namespace ProgramGUI
 
 			ProgressEntry.Text = "Create Entry...";
 
-			Entry entry = await CreateAndPopluateEntry();
+			Entry entry = CreateAndPopluateEntry();
 
 			ProgressEntry.Text = "Creating RSA...";
 
