@@ -76,14 +76,14 @@ namespace ProgramGUI
 
 					rsa.FromXmlString(File.ReadAllText(_xmlStringPath));
 
-					DataCustodianPublisher dataCustodianPublisher = new DataCustodianPublisher
+					DataProdcuer dataPrdocuer = new DataProdcuer
 					{
 						WorkHistroySmartContract = workHistroySmartContract,
 						RSA = rsa
 					};
 
 					ProgressEntry.Text = "Waiting for address...";
-					smartContractAddress = await dataCustodianPublisher.PublishWorkHistoryAsync(entry.OnChainString(), senderAddress, password);
+					smartContractAddress = await dataPrdocuer.PublishWorkHistoryAsync(entry.OnChainString(), senderAddress, password);
 
 					entry.Address = smartContractAddress;
 

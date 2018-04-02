@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace WorkAuthBlockChain
 {
-	public class DataCustodianPublisher
+	public class DataProdcuer
     {
 		private double _progress;
 

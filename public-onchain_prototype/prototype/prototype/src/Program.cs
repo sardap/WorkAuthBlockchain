@@ -33,7 +33,7 @@ namespace prototype.src
 
 					xmlString = RSACryptoServiceProviderExtensions.ToXmlString(rsa);
 
-					DataCustodianPublisher dataCustodianPublisher = new DataCustodianPublisher();
+					DataProdcuer dataCustodianPublisher = new DataProdcuer();
 					dataCustodianPublisher.WorkHistroySmartContract = workHistroySmartContract;
 					dataCustodianPublisher.RSA = rsa;
 
