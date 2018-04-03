@@ -9,9 +9,6 @@ namespace prototype.src
 {
     class Program
     {
-		const int DATA_LENGTH = 428;
-		const int RSA_KEY_LENGTH = 4096;
-
 		public static async Task MainAsync(string[] args)
 		{
 
@@ -23,7 +20,7 @@ namespace prototype.src
 			};
 
 
-			using (rsa = new RSACryptoServiceProvider(RSA_KEY_LENGTH))
+			using (rsa = new RSACryptoServiceProvider(Consts.RSA_KEY_LENGTH))
 			{
 				try
 				{
@@ -51,23 +48,6 @@ namespace prototype.src
 					rsa.PersistKeyInCsp = false;
 				}
 			}
-		}
-
-		private static async Task ExportEntry(DataSubjectSharer dataSubjectSharer)
-		{
-			List<Entry> workHistory = await dataSubjectSharer.GetAllWorkHistory();
-
-			workHistory.ForEach(entry =>
-				Console.WriteLine("ELEMENT:" + (workHistory.IndexOf(entry) + 1) + ":\n" + entry.ToPrettyString())
-			);
-
-			Console.WriteLine("Select Which entry you would like to export");
-
-			int i = Int32.Parse(Console.ReadLine()) - 1;
-
-			Console.WriteLine("Enter file path");
-
-			Utils.ExportToJsonFile(Console.ReadLine(), workHistory[i]);
 		}
 
 		private static async Task CreateWorkHistoryBundle(DataSubjectSharer dataSubjectSharer)
@@ -109,6 +89,23 @@ namespace prototype.src
 			input = Console.ReadLine();
 
 			Utils.ExportToJsonFile(input, dataBundle);
+		}
+
+		private static async Task ExportEntry(DataSubjectSharer dataSubjectSharer)
+		{
+			List<Entry> workHistory = await dataSubjectSharer.GetAllWorkHistory();
+
+			workHistory.ForEach(entry =>
+				Console.WriteLine("ELEMENT:" + (workHistory.IndexOf(entry) + 1) + ":\n" + entry.ToPrettyString())
+			);
+
+			Console.WriteLine("Select Which entry you would like to export");
+
+			int i = Int32.Parse(Console.ReadLine()) - 1;
+
+			Console.WriteLine("Enter file path");
+
+			Utils.ExportToJsonFile(Console.ReadLine(), workHistory[i]);
 		}
 
 		static void Main(string[] args)
