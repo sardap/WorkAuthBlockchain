@@ -1,21 +1,10 @@
 ﻿using Microsoft.Win32;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using WorkAuthBlockChain.src;
+using WorkAuthBlockChain;
 
 namespace ProgramGUI
 {
@@ -48,20 +37,11 @@ namespace ProgramGUI
 			main.Content = new Menu();
 		}
 
-		private async Task<DataBundle> ReadDataBundle()
-		{
-			using (StreamReader r = new StreamReader(_workHistoryBundlePath))
-			{
-				string json = await r.ReadToEndAsync();
-				return await Task.Run(() => JsonConvert.DeserializeObject<DataBundle>(json));
-			}
-		}
-
 		private async void VerfiyClick(object sender, RoutedEventArgs e)
 		{
 			if(_workHistoryBundlePath != null)
 			{
-				DataBundle dataBundle = await ReadDataBundle();
+				DataBundle dataBundle = await Utils.ReadFromJson<DataBundle>(_workHistoryBundlePath);
 
 				VerfiyScreen verfiyScreen = new VerfiyScreen(dataBundle);
 

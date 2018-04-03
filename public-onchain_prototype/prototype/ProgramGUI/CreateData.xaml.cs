@@ -43,6 +43,7 @@ namespace ProgramGUI
 			return new Entry
 			{
 				Domain = DomainEntry.Text,
+				Date = DateEntry.Text,
 				Department = DeparmentEntry.Text,
 				Position = PostionEntry.Text,
 				Name = NameEntry.Text,

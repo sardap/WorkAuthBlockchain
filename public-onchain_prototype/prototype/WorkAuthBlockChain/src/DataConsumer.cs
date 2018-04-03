@@ -16,18 +16,18 @@ namespace WorkAuthBlockChain
 			set;
 		}
 
-		public async Task<VerfiyResult> Verfiy(string data, string address)
+		public async Task<VerfiyResult> Verfiy(Entry entry)
 		{
-			string error = WorkHistroySmartContract.DataValid(data);
+			string error = WorkHistroySmartContract.DataValid(entry.OnChainString());
 
 			if(error == "")
 			{
-				WorkHistroySmartContract.LoadContract(address);
+				WorkHistroySmartContract.LoadContract(entry.Address);
 
 				VerfiyResult result = new VerfiyResult
 				{
-					Sender = await CompareSender(data),
-					Data = await CheckHashes(data)
+					Sender = await CompareSender(entry.Domain),
+					Data = await CheckHashes(entry.OnChainString())
 				};
 
 				return result;
@@ -38,16 +38,16 @@ namespace WorkAuthBlockChain
 			}
 		}
 
-		private async Task<bool> CheckHashes(string data)
+		private async Task<bool> CheckHashes(string onChainString)
 		{
-			return Utils.GetHash(data).SequenceEqual(await WorkHistroySmartContract.GetHash());
+			return Utils.GetHash(onChainString).SequenceEqual(await WorkHistroySmartContract.GetHash());
 		}
 
-		private async Task<bool> CompareSender(string data)
+		private async Task<bool> CompareSender(string domain)
 		{
 			using (WebClient wc = new WebClient())
 			{
-				string URL = "http://" + data.Split(',')[0] + "/PKNR.json";
+				string URL = "http://" + domain + "/PKNR.json";
 
 				string jsonSource = wc.DownloadString(URL);
 

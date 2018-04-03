@@ -13,6 +13,7 @@
 				<GridView>
 					<GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>
 					<GridViewColumn Header="Domain" DisplayMemberBinding="{Binding Domain}"/>
+					<GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date}"/>
 					<GridViewColumn Header="Department" DisplayMemberBinding="{Binding Department}"/>
 					<GridViewColumn Header="Position" DisplayMemberBinding="{Binding Position}"/>
 					<GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>

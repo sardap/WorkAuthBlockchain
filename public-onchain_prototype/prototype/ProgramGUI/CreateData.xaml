@@ -41,7 +41,25 @@
 						</TextBox>
 					</Border>
 				</Grid>
-
+				
+				<Grid Margin="0,25,0,0">
+					<Border CornerRadius="10" Padding="2" Grid.Column="1" Width="650" Height="45" RenderTransformOrigin="0.844,0.439"  HorizontalAlignment="Center" >
+						<Border.Background>
+							<LinearGradientBrush StartPoint="0,0" EndPoint="0,0">
+								<GradientStop Color="#95989a" Offset="0" />
+								<GradientStop Color="#95989a" Offset="0.75" />
+							</LinearGradientBrush>
+						</Border.Background>
+						<TextBox Cursor="Hand" x:Name="DateEntry" Padding="5,0,0,0" BorderBrush="#95989a" Foreground="#95989a" FontSize="30" Text="Enter Start Date here..."  TextAlignment="Left" >
+							<TextBox.Resources>
+								<Style TargetType="{x:Type Border}">
+									<Setter Property="CornerRadius" Value="10"/>
+								</Style>
+							</TextBox.Resources>
+						</TextBox>
+					</Border>
+				</Grid>
+				
 				<Grid Margin="0,25,0,0">
 					<Border CornerRadius="10" Padding="2" Grid.Column="1" Width="650" Height="45" RenderTransformOrigin="0.844,0.439"  HorizontalAlignment="Center" >
 						<Border.Background>

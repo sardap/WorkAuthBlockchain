@@ -62,7 +62,7 @@ namespace ProgramGUI
 
 				foreach (Entry entry in Entries)
 				{
-					VerfiyResult verfiyResult = await dataConsumer.Verfiy(entry.OnChainString(), entry.Address);
+					VerfiyResult verfiyResult = await dataConsumer.Verfiy(entry);
 
 					VerfiyEntry verfiyEntry = new VerfiyEntry(entry)
 					{

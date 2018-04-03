@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using WorkAuthBlockChain;
 using System.Collections.Generic;
+using System.IO;
 
 namespace prototype.src
 {
@@ -11,86 +12,108 @@ namespace prototype.src
 		const int DATA_LENGTH = 428;
 		const int RSA_KEY_LENGTH = 4096;
 
-		public static async Task MainAsync()
+		public static async Task MainAsync(string[] args)
 		{
-			string xmlString;
 
 			WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
 			RSACryptoServiceProvider rsa;
-			string address;
-			//string data = new string('*', DATA_LEN GTH);
-			string data = "paulsarda.com, IT Idiot";
+			DataSubjectSharer dataSubjectSharer = new DataSubjectSharer
+			{
+				WorkHistroySmartContract = workHistroySmartContract,
+			};
 
-			Console.WriteLine("DATA CUSTODIAN");
+
 			using (rsa = new RSACryptoServiceProvider(RSA_KEY_LENGTH))
 			{
 				try
 				{
+					dataSubjectSharer.RSA = rsa;
 
-					string senderAddress = "0x7bc0157bc7e0ae9183e6d7688009963b18855248";
-					string password = "passphrase";
-					workHistroySmartContract.RSA = rsa;
+					string xmlString = new StreamReader(args[1]).ReadToEnd();
+					RSACryptoServiceProviderExtensions.FromXmlString(rsa, xmlString);
 
-					xmlString = RSACryptoServiceProviderExtensions.ToXmlString(rsa);
-
-					DataProdcuer dataCustodianPublisher = new DataProdcuer();
-					dataCustodianPublisher.WorkHistroySmartContract = workHistroySmartContract;
-					dataCustodianPublisher.RSA = rsa;
-
-					Console.WriteLine("Original Data: {0}", data);
-
-					address = await dataCustodianPublisher.PublishWorkHistoryAsync(data, senderAddress, password);
-
-					while (address == null) ;
-
-					workHistroySmartContract.LoadContract(address);
-
-					bool match = await dataCustodianPublisher.CompareHashAsync(data);
-
-					Console.WriteLine("Are they a match {0}", match);
+					switch (args[0].ToLower())
+					{
+						case "add":
+							dataSubjectSharer.AddAddress(args[2]);
+							dataSubjectSharer.SaveChangesToAddresses();
+							break;
+						case "craete":
+							await CreateWorkHistoryBundle(dataSubjectSharer);
+							break;
+						case "export":
+							await ExportEntry(dataSubjectSharer);
+							break;
+					}
 				}
 				finally
 				{
 					rsa.PersistKeyInCsp = false;
 				}
+			}
+		}
 
-				Console.WriteLine("DATA SUBJECT");
-				using (rsa = new RSACryptoServiceProvider(RSA_KEY_LENGTH))
+		private static async Task ExportEntry(DataSubjectSharer dataSubjectSharer)
+		{
+			List<Entry> workHistory = await dataSubjectSharer.GetAllWorkHistory();
+
+			workHistory.ForEach(entry =>
+				Console.WriteLine("ELEMENT:" + (workHistory.IndexOf(entry) + 1) + ":\n" + entry.ToPrettyString())
+			);
+
+			Console.WriteLine("Select Which entry you would like to export");
+
+			int i = Int32.Parse(Console.ReadLine()) - 1;
+
+			Console.WriteLine("Enter file path");
+
+			Utils.ExportToJsonFile(Console.ReadLine(), workHistory[i]);
+		}
+
+		private static async Task CreateWorkHistoryBundle(DataSubjectSharer dataSubjectSharer)
+		{
+			DataBundle dataBundle = new DataBundle();
+			List<Entry> workHistory = await dataSubjectSharer.GetAllWorkHistory();
+
+			workHistory.ForEach(i =>
+				Console.WriteLine("ELEMENT:" + (workHistory.IndexOf(i) + 1) + ":\n" + i.ToPrettyString())
+			);
+
+
+			Console.WriteLine("Please enter index for each entry you would like to add After type done");
+
+			string input;
+
+			do
+			{
+				input = Console.ReadLine();
+				try
 				{
-					try
-					{
-						RSACryptoServiceProviderExtensions.FromXmlString(rsa, xmlString);
-
-						DataSubjectSharer dataSubjectSharer = new DataSubjectSharer();
-						dataSubjectSharer.WorkHistroySmartContract = workHistroySmartContract;
-						dataSubjectSharer.RSA = rsa;
-
-						string decryptedData = await dataSubjectSharer.DecryptDataFromContract();
-
-						Console.WriteLine("Decryped Data from blockchain: {0}", decryptedData);
-					}
-					finally
-					{
-						rsa.PersistKeyInCsp = false;
-					}
+					int i = Int32.Parse(input) - 1;
+					dataBundle.WorkHistory.Add(workHistory[i]);
+				}
+				catch (Exception e)
+				{
 				}
 
-				Console.WriteLine("DATA CONSUMER");
-				DataConsumer dataConsumer = new DataConsumer();
-				dataConsumer.WorkHistroySmartContract = workHistroySmartContract;
+			} while (input != "done");
 
-				// @Bad Should probalby not be a list of fucking bools
-				VerfiyResult verfiyResult = await dataConsumer.Verfiy(data, address);
-				Console.WriteLine("The data hash is {0}", verfiyResult.Data);
-				Console.WriteLine("The data issuer is {0}", verfiyResult.Sender);
+			Console.WriteLine("Please enter the file name for each referee to add. After enter done");
+
+			while ((input = Console.ReadLine()) != "done")
+			{
+				dataBundle.Referees.Add(await Entry.ReadEntry(input));
 			}
+
+			Console.WriteLine("Enter file name");
+			input = Console.ReadLine();
+
+			Utils.ExportToJsonFile(input, dataBundle);
 		}
 
 		static void Main(string[] args)
 		{
-			MainAsync().GetAwaiter().GetResult();
-
-			Console.ReadLine();
+			MainAsync(args).GetAwaiter().GetResult();
 		}
 	}
 }

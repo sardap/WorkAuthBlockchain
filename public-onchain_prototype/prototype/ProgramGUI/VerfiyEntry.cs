@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
+using WorkAuthBlockChain;
 using WorkAuthBlockChain.src;
 
 namespace ProgramGUI
@@ -15,6 +16,7 @@ namespace ProgramGUI
 		public bool DataValid { get; set; }
 		public string Address { get; set; }
 		public string Domain { get; set; }
+		public string Date { get; set; }
 		public string Department { get; set; }
 		public string Position { get; set; }
 		public string Name { get; set; }
@@ -24,6 +26,7 @@ namespace ProgramGUI
 		public VerfiyEntry(Entry entry) : base()
 		{
 			Address = entry.Address;
+			Date = entry.Date;
 			Domain = entry.Domain;
 			Department = entry.Department;
 			Position = entry.Position;
