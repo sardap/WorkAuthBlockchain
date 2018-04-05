@@ -56,9 +56,11 @@ namespace WorkAuthBlockChain
 
 			foreach (string address in Addresses)
 			{
-				WorkHistroySmartContract.LoadContract(address);
-				string onChainData = await DecryptDataFromContract();
-				result.Add(new Entry(address + "," + onChainData));
+				if(WorkHistroySmartContract.LoadContract(address))
+				{
+					string onChainData = await DecryptDataFromContract();
+					result.Add(new Entry(address + "," + onChainData));
+				}
 			}
 
 			return result;

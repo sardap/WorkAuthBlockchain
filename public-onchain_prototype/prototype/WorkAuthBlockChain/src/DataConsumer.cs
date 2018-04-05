@@ -45,23 +45,30 @@ namespace WorkAuthBlockChain
 
 		private async Task<bool> CompareSender(string domain)
 		{
-			using (WebClient wc = new WebClient())
+			try
 			{
-				string URL = "http://" + domain + "/PKNR.json";
-
-				string jsonSource = wc.DownloadString(URL);
-
-				dynamic jsonParsed = JObject.Parse(jsonSource);
-
-				string creatorAddress = await WorkHistroySmartContract.GetCreator();
-
-				foreach(string s in jsonParsed.public_keys)
+				using (WebClient wc = new WebClient())
 				{
-					if(s == creatorAddress)
+					string URL = "http://" + domain + "/PKNR.json";
+
+					string jsonSource = wc.DownloadString(URL);
+
+					dynamic jsonParsed = JObject.Parse(jsonSource);
+
+					string creatorAddress = await WorkHistroySmartContract.GetCreator();
+
+					foreach (string s in jsonParsed.public_keys)
 					{
-						return true;
+						if (s == creatorAddress)
+						{
+							return true;
+						}
 					}
 				}
+			}
+			catch(Exception e)
+			{
+				return false;
 			}
 
 			return false;

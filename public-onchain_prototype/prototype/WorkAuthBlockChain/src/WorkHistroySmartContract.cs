@@ -47,9 +47,11 @@ namespace WorkAuthBlockChain
 			set;
 		}
 
-		public void LoadContract(string address)
+		public bool LoadContract(string address)
 		{
 			_contract = _web3.Eth.GetContract(ABI, address);
+
+			return _contract != null;
 		}
 
 		public async Task<bool> UnlockAccount(string address, string password)
