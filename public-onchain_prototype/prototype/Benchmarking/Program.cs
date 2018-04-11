@@ -12,13 +12,22 @@ namespace Benchmarking
     class Program
     {
 
-		private const int NUMBER_OF_TESTS = 100000;
+		private const int NUMBER_OF_TESTS = 100;
 
-		public static async Task<double> BenchmarkWorkHistoryBundleCreation()
+		public class BenchmarkEntry
 		{
+			public string TimeStamp { get; set; }
 
-			Stopwatch stopwatch = new Stopwatch();
+			public double TimeElpased { get; set; }
 
+			public override string ToString()
+			{
+				return TimeStamp + "," + TimeElpased;
+			}
+		}
+
+		public static async Task BenchmarkWorkHistoryBundleCreation(int n)
+		{
 			Queue<string> inputQue = new Queue<string>();
 			inputQue.Enqueue("1");
 			inputQue.Enqueue("2");
@@ -26,10 +35,7 @@ namespace Benchmarking
 			inputQue.Enqueue("done");
 			inputQue.Enqueue("ref.json");
 			inputQue.Enqueue("done");
-			inputQue.Enqueue("workBundle.json");
-
-			// START OF BENCHMARK
-			stopwatch.Start();
+			inputQue.Enqueue("workBundle" + n + ".json");
 
 			WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
 			RSACryptoServiceProvider rsa;
@@ -42,7 +48,6 @@ namespace Benchmarking
 			{
 				try
 				{
-
 					dataSubjectSharer.RSA = rsa;
 
 					string xmlString = new StreamReader("privatePaul.xml").ReadToEnd();
@@ -51,13 +56,6 @@ namespace Benchmarking
 					DataBundle dataBundle = new DataBundle();
 					List<Entry> workHistory = await dataSubjectSharer.GetAllWorkHistory();
 
-					/*
-					workHistory.ForEach(i =>
-						Console.WriteLine("ELEMENT:" + (workHistory.IndexOf(i) + 1) + ":\n" + i.ToPrettyString())
-					);
-
-					Console.WriteLine("Please enter index for each entry you would like to add After type done");
-					*/
 					string input;
 
 					do
@@ -74,47 +72,52 @@ namespace Benchmarking
 
 					} while (input != "done");
 
-					//Console.WriteLine("Please enter the file name for each referee to add. After enter done");
-
 					while ((input = inputQue.Dequeue()) != "done")
 					{
 						dataBundle.Referees.Add(await Entry.ReadEntry(input));
 					}
 
-					//Console.WriteLine("Enter file name");
 					input = inputQue.Dequeue();
 
-					Utils.ExportToJsonFile(input, dataBundle);
-
+					//Utils.ExportToJsonFile(input, dataBundle);
 				}
 				finally
 				{
 					rsa.PersistKeyInCsp = false;
 				}
 			}
-
-			return stopwatch.Elapsed.TotalMilliseconds;
-		}
-
-		public static async Task MainAsync(string[] args)
-		{
-			List<double> results = new List<double>();
-
-			for(int i = 0; i < NUMBER_OF_TESTS; i++)
-			{
-				results.Add(await BenchmarkWorkHistoryBundleCreation());
-				Console.WriteLine(i + results[results.Count - 1]);
-			}
-
-			using (StreamWriter resultFile = File.CreateText("result.csv"))
-			{
-				results.ForEach(i => resultFile.WriteLine(i));
-			}
 		}
 
 		public static void Main(string[] args)
 		{
-			MainAsync(args).GetAwaiter().GetResult();
+			Stopwatch stopwatch = new Stopwatch();
+
+			List<BenchmarkEntry> results = new List<BenchmarkEntry>();
+			for (int i = 0; i < NUMBER_OF_TESTS; i++)
+			{
+				//string deletePath = "workBundle" + i + ".json";
+				//File.Delete(deletePath);
+
+				stopwatch.Start();
+				BenchmarkWorkHistoryBundleCreation(i).GetAwaiter().GetResult();
+				stopwatch.Stop();
+
+				results.Add(
+					new BenchmarkEntry
+					{
+						TimeElpased = ((double)stopwatch.ElapsedTicks / Stopwatch.Frequency) * 1000000000,
+						TimeStamp = DateTime.Now.TimeOfDay.ToString()
+					}
+				);
+
+				//File.Delete(deletePath);
+				Console.WriteLine(i);
+			}
+
+			using (StreamWriter resultFile = File.CreateText("resultNoIO.csv"))
+			{
+				results.ForEach(i => resultFile.WriteLine(i));
+			}
 
 		}
 	}
