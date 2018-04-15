@@ -26,17 +26,9 @@ namespace Benchmarking
 			}
 		}
 
-		public static async Task BenchmarkWorkHistoryBundleCreation(int n)
+		public static async Task BenchmarkWorkHistoryBundleCreation(Queue<string> inputQue)
 		{
-			Queue<string> inputQue = new Queue<string>();
-			inputQue.Enqueue("1");
-			inputQue.Enqueue("2");
-			inputQue.Enqueue("0");
-			inputQue.Enqueue("done");
-			inputQue.Enqueue("ref.json");
-			inputQue.Enqueue("done");
-			inputQue.Enqueue("workBundle" + n + ".json");
-
+			
 			WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
 			RSACryptoServiceProvider rsa;
 			DataSubjectSharer dataSubjectSharer = new DataSubjectSharer
@@ -79,7 +71,7 @@ namespace Benchmarking
 
 					input = inputQue.Dequeue();
 
-					//Utils.ExportToJsonFile(input, dataBundle);
+					Utils.ExportToJsonFile(input, dataBundle);
 				}
 				finally
 				{
@@ -93,30 +85,32 @@ namespace Benchmarking
 			Stopwatch stopwatch = new Stopwatch();
 
 			List<BenchmarkEntry> results = new List<BenchmarkEntry>();
-			for (int i = 0; i < NUMBER_OF_TESTS; i++)
+			string fileName = "workBundle.json";
+
+			Queue<string> inputQue = new Queue<string>();
+			inputQue.Enqueue("1");
+			inputQue.Enqueue("2");
+			inputQue.Enqueue("0");
+			inputQue.Enqueue("done");
+			inputQue.Enqueue("ref.json");
+			inputQue.Enqueue("done");
+			inputQue.Enqueue(fileName);
+
+			File.Delete(fileName);
+
+			stopwatch.Start();
+			BenchmarkWorkHistoryBundleCreation(inputQue).GetAwaiter().GetResult();
+			stopwatch.Stop();
+
+			using (StreamWriter resultFile = new StreamWriter("resultNoIO.csv", true))
 			{
-				//string deletePath = "workBundle" + i + ".json";
-				//File.Delete(deletePath);
-
-				stopwatch.Start();
-				BenchmarkWorkHistoryBundleCreation(i).GetAwaiter().GetResult();
-				stopwatch.Stop();
-
-				results.Add(
+				resultFile.WriteLine(
 					new BenchmarkEntry
 					{
 						TimeElpased = ((double)stopwatch.ElapsedTicks / Stopwatch.Frequency) * 1000000000,
 						TimeStamp = DateTime.Now.TimeOfDay.ToString()
 					}
 				);
-
-				//File.Delete(deletePath);
-				Console.WriteLine(i);
-			}
-
-			using (StreamWriter resultFile = File.CreateText("resultNoIO.csv"))
-			{
-				results.ForEach(i => resultFile.WriteLine(i));
 			}
 
 		}
