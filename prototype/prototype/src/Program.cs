@@ -4,14 +4,16 @@ using System.Security.Cryptography;
 using WorkAuthBlockChain;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using WorkAuthBlockChain;
 
 namespace prototype.src
 {
     class Program
     {
-		public static async Task MainAsync(string[] args)
-		{
 
+		private static async Task EmpMenu(string[] args)
+		{
 			WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
 			RSACryptoServiceProvider rsa;
 			DataSubjectSharer dataSubjectSharer = new DataSubjectSharer
@@ -48,6 +50,37 @@ namespace prototype.src
 					rsa.PersistKeyInCsp = false;
 				}
 			}
+		}
+
+		private static async void RefMenu(IList<string> args)
+		{
+
+			switch(args[0].ToLower())
+			{
+				case "create":
+
+
+					break;
+			}
+
+			throw new NotImplementedException();
+		}
+
+		public static async Task MainAsync(string[] args)
+		{
+			switch(args[0].ToLower())
+			{
+				case "emp":
+					var empArgs = args.ToList();
+					empArgs.RemoveAt(0);
+					await EmpMenu(empArgs.ToArray());
+					break;
+
+				case "ref":
+					RefMenu(args);
+					break;
+			}
+			
 		}
 
 		private static async Task CreateWorkHistoryBundle(DataSubjectSharer dataSubjectSharer)
