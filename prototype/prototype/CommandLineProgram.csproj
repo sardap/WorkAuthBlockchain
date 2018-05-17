@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WorkAuthBlockChain\WorkAuthBlockChain.csproj" />
+    <ProjectReference Include="..\..\..\WorkHistoryAuthenticationVerificationService\prototype\WorkAuthBlockChain\WorkAuthBlockChain.csproj" />
   </ItemGroup>
 
 

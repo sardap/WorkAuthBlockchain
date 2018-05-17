@@ -55,9 +55,21 @@ namespace prototype.src
 		private static async void RefMenu(IList<string> args)
 		{
 
-			switch(args[0].ToLower())
+			switch (args[0].ToLower())
 			{
 				case "create":
+					var creator = new RefSharerCreator
+					{
+						RefSharingContract = new RefSharingContract()
+					};
+
+					await creator.RefSharingContract.UnlockAccount(args[1], args[2]);
+
+					await creator.DeployContractAsync(args[3].ToLower(), args[4].ToLower(), args[5]);
+
+					break;
+
+				case "share":
 
 
 					break;
@@ -68,16 +80,18 @@ namespace prototype.src
 
 		public static async Task MainAsync(string[] args)
 		{
-			switch(args[0].ToLower())
+			string mode = args[0].ToLower();
+			var argsList = args.ToList();
+			argsList.RemoveAt(0);
+
+			switch (mode)
 			{
 				case "emp":
-					var empArgs = args.ToList();
-					empArgs.RemoveAt(0);
-					await EmpMenu(empArgs.ToArray());
+					await EmpMenu(argsList.ToArray());
 					break;
 
 				case "ref":
-					RefMenu(args);
+					RefMenu(argsList);
 					break;
 			}
 			
