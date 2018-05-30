@@ -63,9 +63,7 @@ namespace prototype.src
 						RefSharingContract = new RefSharingContract()
 					};
 
-					await creator.RefSharingContract.UnlockAccount(args[1], args[2]);
-
-					await creator.DeployContractAsync(args[3].ToLower(), args[4].ToLower(), args[5]);
+					await creator.DeployContractAsync(args[1], args[2], args[3].ToLower(), args[4]);
 
 					break;
 
