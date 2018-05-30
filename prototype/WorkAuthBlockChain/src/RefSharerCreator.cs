@@ -8,15 +8,11 @@ namespace WorkAuthBlockChain
 	{
 		public RefSharingContract RefSharingContract { get; set; }
 
-		public async Task<byte[]> DeployContractAsync(string address, string password, string refrereeText, string sharerAdress)
+		public async Task<string> DeployContractAsync(string senderAddress, string password, string refrereeText, string sharerAdress)
 		{
-			int x = 0;
+			await RefSharingContract.UnlockAccount(senderAddress, password);
 
-			await RefSharingContract.UnlockAccount(address, password);
-
-			await RefSharingContract.Deploy(refrereeText, sharerAdress);
-
-			return new byte[] { };
+			return await RefSharingContract.Deploy(refrereeText, sharerAdress); ;
 		}
 	}
 }

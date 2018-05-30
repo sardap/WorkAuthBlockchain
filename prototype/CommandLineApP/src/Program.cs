@@ -7,11 +7,16 @@ using System.IO;
 using System.Linq;
 using WorkAuthBlockChain;
 
+// Create
+// ref create 0x25922333d41f0f3f40be629f81af6983634d0fb6 passphrase pauliscool 0xf8d7ed06ee59ee030f5b5a5b0ad9777c00e89c3d
+
+// Share		Sender Address								Geth Password	Target Address								Contract Address
+// ref share	0xf8d7ed06ee59ee030f5b5a5b0ad9777c00e89c3d	passphrase		0x7217461990542841aa38d247419be2af405c4282	0x18bbc7ef51db1b20273f24ff0428b5feff011d3f
+
 namespace prototype.src
 {
     class Program
     {
-
 		private static async Task EmpMenu(string[] args)
 		{
 			WorkHistroySmartContract workHistroySmartContract = new WorkHistroySmartContract();
@@ -20,7 +25,6 @@ namespace prototype.src
 			{
 				WorkHistroySmartContract = workHistroySmartContract,
 			};
-
 
 			using (rsa = new RSACryptoServiceProvider(Consts.RSA_KEY_LENGTH))
 			{
@@ -52,28 +56,36 @@ namespace prototype.src
 			}
 		}
 
-		private static async void RefMenu(IList<string> args)
+		private static async Task RefMenu(IList<string> args)
 		{
+			RefSharingContract RefSharingContract = new RefSharingContract();
 
 			switch (args[0].ToLower())
 			{
+				//args 1 senderAddress, 2: geth password, 3: refreeText, 4: sharer address
 				case "create":
-					var creator = new RefSharerCreator
+					RefSharerCreator creator = new RefSharerCreator
 					{
-						RefSharingContract = new RefSharingContract()
+						RefSharingContract = RefSharingContract
 					};
 
-					await creator.DeployContractAsync(args[1], args[2], args[3].ToLower(), args[4]);
+					Console.WriteLine("Contract address {0}", await creator.DeployContractAsync(args[1], args[2], args[3], args[4]));
 
 					break;
 
+				//args 1 senderAddress, 2: geth password, 3: targetAddress
 				case "share":
+					RefSharer sharer = new RefSharer
+					{
+						RefSharingContract = RefSharingContract
+					};
 
+					Console.WriteLine("Comeplted transaction hash {0}", await sharer.Share(args[1], args[2], args[3], args[4]));
 
 					break;
 			}
 
-			throw new NotImplementedException();
+			return;
 		}
 
 		public static async Task MainAsync(string[] args)
@@ -89,7 +101,7 @@ namespace prototype.src
 					break;
 
 				case "ref":
-					RefMenu(argsList);
+					await RefMenu(argsList);
 					break;
 			}
 			
@@ -156,6 +168,7 @@ namespace prototype.src
 		static void Main(string[] args)
 		{
 			MainAsync(args).GetAwaiter().GetResult();
+			Console.ReadLine();
 		}
 	}
 }

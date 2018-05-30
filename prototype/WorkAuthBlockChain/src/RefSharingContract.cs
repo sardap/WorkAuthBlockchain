@@ -38,7 +38,9 @@ namespace WorkAuthBlockChain
 
 		public async Task<string> Deploy(string encryptedData, string sharerAddress)
 		{
-			_trasnactionHash = await _web3.Eth.DeployContract.SendRequestAsync(ABI, BYTE_CODE, encryptedData, sharerAddress);
+			var test = _web3.Eth.Accounts;
+
+			_trasnactionHash = await _web3.Eth.DeployContract.SendRequestAsync(ABI, BYTE_CODE, _senderAddress, GAS_LIMIT, encryptedData, sharerAddress);
 
 			TransactionReceipt receipt = null;
 			while (receipt == null)
@@ -49,7 +51,16 @@ namespace WorkAuthBlockChain
 			return receipt.ContractAddress;
 		}
 
-		public async Task<string> GetData()
+		public async Task<string> ExecuteShare(string targetAdress)
+		{
+			Function shareWithAddress = _contract.GetFunction("ShareWithAddress");
+
+			string transactionHash = await shareWithAddress.SendTransactionAsync(_senderAddress, GAS_LIMIT, new HexBigInteger("0x0"), targetAdress);
+
+			return transactionHash;
+		}
+
+		public async Task<string> getData()
 		{
 			Function getDataFunction = _contract.GetFunction("getData");
 
