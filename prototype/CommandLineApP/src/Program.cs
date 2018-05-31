@@ -13,9 +13,11 @@ using WorkAuthBlockChain;
 // Share		Sender Address								Geth Password	Target Address								Contract Address
 // ref share	0xf8d7ed06ee59ee030f5b5a5b0ad9777c00e89c3d	passphrase		0x7217461990542841aa38d247419be2af405c4282	0x18bbc7ef51db1b20273f24ff0428b5feff011d3f
 
-//args 1 
-// respond		Sender Address								Geth password	Contract Address
-//respond			0x25922333d41f0f3f40be629f81af6983634d0fb6	passphrase		0x18bbc7ef51db1b20273f24ff0428b5feff011d3f
+// Respond		Sender Address								Geth password	Contract Address
+// ref respond	0x25922333d41f0f3f40be629f81af6983634d0fb6	passphrase		0x18bbc7ef51db1b20273f24ff0428b5feff011d3f
+
+// View		Contract Address
+// ref view		0x18bbc7ef51db1b20273f24ff0428b5feff011d3f
 
 namespace prototype.src
 {
@@ -113,6 +115,17 @@ namespace prototype.src
 					input = Console.ReadLine();
 
 					Console.WriteLine("Transaction sent {0}", await respond.RespondRequest(addresses[number], input.ToLower() == "yes" ? true : false));
+
+					break;
+
+				//args 1 contractAddress
+				case "view":
+					RefView refView = new RefView
+					{
+						RefSharingContract = RefSharingContract
+					};
+
+					Console.WriteLine(await refView.GetRefence(args[1]));
 
 					break;
 			}
