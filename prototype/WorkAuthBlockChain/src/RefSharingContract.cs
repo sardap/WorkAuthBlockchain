@@ -60,6 +60,24 @@ namespace WorkAuthBlockChain
 			return transactionHash;
 		}
 
+		public async Task<string> getShareRecords()
+		{
+			Function getShareRecordsFunction = _contract.GetFunction("getShareRecords");
+
+			string addresses = await getShareRecordsFunction.CallAsync<string>();
+
+			return addresses;
+		}
+
+		public async Task<string> RespondRequest(string address, bool response)
+		{
+			Function shareWithAddress = _contract.GetFunction("RespondRequest");
+
+			string transactionHash = await shareWithAddress.SendTransactionAsync(_senderAddress, GAS_LIMIT, new HexBigInteger("0x0"), address, response);
+
+			return transactionHash;
+		}
+
 		public async Task<string> getData()
 		{
 			Function getDataFunction = _contract.GetFunction("getData");
