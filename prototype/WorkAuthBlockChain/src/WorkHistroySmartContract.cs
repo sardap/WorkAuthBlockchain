@@ -120,8 +120,5 @@ namespace WorkAuthBlockChain
 
 			return error;
 		}
-
-
-
 	}
 }
